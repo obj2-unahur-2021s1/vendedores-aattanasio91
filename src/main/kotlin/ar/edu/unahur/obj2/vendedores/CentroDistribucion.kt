@@ -5,7 +5,11 @@ class CentroDistribucion(val ciudad:Ciudad){
     val vendedores = mutableListOf<Vendedor>()
 
     fun agregarVendedor(vendedor:Vendedor){
-        vendedores.add(vendedor)
+        if(!vendedores.contains(vendedor)){
+            vendedores.add(vendedor)
+        }else{
+            throw Exception("No se puede agregar dos veces el mismo vendedor")
+        }
     }
 
     fun vendedorEstrella() : Vendedor? {
