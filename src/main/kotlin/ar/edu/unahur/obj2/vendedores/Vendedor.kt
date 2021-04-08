@@ -37,28 +37,29 @@ abstract class Vendedor {
 // En los parámetros, es obligatorio poner el tipo
 class VendedorFijo(val ciudadOrigen: Ciudad) : Vendedor() {
 
-    override fun puedeTrabajarEn(ciudad: Ciudad): Boolean = ciudad == ciudadOrigen
+    override fun puedeTrabajarEn(ciudad: Ciudad) = ciudad == ciudadOrigen
 
-    override fun esInfluyente(): Boolean = false
+    override fun esInfluyente() = false
 
 }
 
 // A este tipo de List no se le pueden agregar elementos una vez definida
 class Viajante(val provinciasHabilitadas: List<Provincia>) : Vendedor() {
 
-    override fun puedeTrabajarEn(ciudad: Ciudad): Boolean =
+    override fun puedeTrabajarEn(ciudad: Ciudad) =
         provinciasHabilitadas.contains(ciudad.provincia)
 
-    override fun esInfluyente(): Boolean = provinciasHabilitadas.sumBy { it.poblacion } >= 10000
+    override fun esInfluyente() = provinciasHabilitadas.sumBy { it.poblacion } >= 10000
 
 }
 
 class ComercioCorresponsal(val ciudades: List<Ciudad>) : Vendedor() {
 
-    override fun puedeTrabajarEn(ciudad: Ciudad): Boolean = ciudades.contains(ciudad)
+    override fun puedeTrabajarEn(ciudad: Ciudad) = ciudades.contains(ciudad)
 
     override fun esInfluyente() = provinciasDondeTrabaja().count() >= 3 || ciudadesDondeTrabaja().count() >= 5
     
     fun provinciasDondeTrabaja() = ciudades.map { it.provincia }.toSet()
+
     fun ciudadesDondeTrabaja() = ciudades.toSet()
 }

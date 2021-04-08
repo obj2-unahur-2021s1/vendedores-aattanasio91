@@ -11,11 +11,11 @@ class CentroDistribucion(val ciudad:Ciudad){
         vendedores.add(vendedor)
     }
 
-    fun vendedorEstrella() : Vendedor? = vendedores.maxBy { it.puntajeCertificaciones() }
+    fun vendedorEstrella() = vendedores.maxBy { it.puntajeCertificaciones() }
 
-    fun puedeCubrirCiudad(ciudad:Ciudad) : Boolean = vendedores.any { it.puedeTrabajarEn(ciudad) }
+    fun puedeCubrirCiudad(ciudad:Ciudad) = vendedores.any { it.puedeTrabajarEn(ciudad) }
 
-    fun vendedoresGenericos() : List<Vendedor> = vendedores.filter { it.otrasCertificaciones() >= 1 }
+    fun vendedoresGenericos() = vendedores.filter { it.otrasCertificaciones() >= 1 }
 
-    fun esRobusto() : Boolean = vendedores.count{ it.esFirme() } >= 3
+    fun esRobusto() = vendedores.count{ it.esFirme() } >= 3
 }
