@@ -57,13 +57,8 @@ class ComercioCorresponsal(val ciudades: List<Ciudad>) : Vendedor() {
 
     override fun puedeTrabajarEn(ciudad: Ciudad): Boolean = ciudades.contains(ciudad)
 
-    override fun esInfluyente(): Boolean {
-        var esInfluyente = false
-        val provinciasDondeTrabaja = ciudades.map { it.provincia }.toSet()
-        val ciudadesDondeTrabaja = ciudades.toSet()
-        if (provinciasDondeTrabaja.count() >= 3 || ciudadesDondeTrabaja.count() >= 5) {
-            esInfluyente = true
-        }
-        return esInfluyente
-    }
+    override fun esInfluyente() = provinciasDondeTrabaja().count() >= 3 || ciudadesDondeTrabaja().count() >= 5
+    
+    fun provinciasDondeTrabaja() = ciudades.map { it.provincia }.toSet()
+    fun ciudadesDondeTrabaja() = ciudades.toSet()
 }
